@@ -1,0 +1,18 @@
+version: '2'
+services:
+  front:
+    build: nginx
+    restart: always
+    ports:
+    - "80:80"
+    volumes_from:
+      - web
+    volumes:
+      - /code
+    links:
+      - web:web
+
+  web:
+    build: app
+    volumes:
+      - /code

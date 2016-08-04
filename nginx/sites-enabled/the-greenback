@@ -1,0 +1,18 @@
+#docker run --name some-nginx -v /home/maka/www/nginx.conf:/etc/nginx/nginx.conf:ro -v /home/maka/www/logs/:/etc/nginx/logs -v /home/maka/www/client/:/etc/nginx/client -v /home/maka/www/mime.types:/etc/nginx/mime.types -p 0.0.0.0:80:80 -d nginx
+
+#  upstream big_server_com {
+#    server http://web:8080;
+#  }
+
+  server { # simple load balancing
+    listen          80;
+    server_name     the-greenback.com;
+#    access_log      logs/the-greenback.com.access.log;
+
+    location / {
+      root    /code;
+	  expires 1m;
+        #proxy_pass      http://big_server_com;
+    }
+  }
+
